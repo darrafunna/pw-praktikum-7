@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>SearchLoc</title>
+  </head>
+  <body>
+    <div class="content">
+      <div class="container">
+        <div class="welcomeText">
+          <h1>Welcome to SearchLoc!</h1>
+          <p>Masukkan provinsimu dan temukan kotamu dengan mudah.</p>
+          <br /><br />
+        </div>
+
+        <div class="dropdown">
+          <label for="provinsi">Provinsi</label>
+          <select name="prov" id="prov" onchange="selectKota(this.id, 'kota')">
+            <option value="">-- Pilih Provinsi --</option>
+            <option value="Aceh">Aceh</option>
+            <option value="Sumatera Utara">Sumatera Utara</option>
+            <option value="Sumatera Barat">Sumatera Barat</option>
+            <option value="DKI Jakarta">DKI Jakarta</option>
+            <option value="Jawa Barat">Jawa Barat</option>
+            <option value="Jawa Timur">Jawa Timur</option>
+          </select>
+        </div>
+
+        <div class="dropdown">
+          <label for="">Kota</label>
+          <select name="kota" id="kota" onclick="outputText()"></select>
+        </div>
+
+        <div class="text">
+          <br /><br /><br />
+          <p id="headingText"></p>
+        </div>
+
+        <div class="toggle">
+          <label class="switch">
+            <input type="checkbox" onclick="darkMode()" />
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="gambar">
+        <img src="gambar.png" alt="" />
+      </div>
+    </div>
+
+    <script>
+      function selectKota(prov, kota) {
+        var prov = document.getElementById(prov);
+        var kota = document.getElementById(kota);
+
+        kota.innerHTML = "";
+
+        if (prov.value == "Aceh") {
+          var optionKota = [
+            "Banda Aceh|Banda Aceh",
+            "Langsa|Langsa",
+            "Lhokseumawe|Lhokseumawe",
+            "Sabang|Sabang",
+            "Subulussalam|Subulussalam",
+          ];
+        } else if (prov.value == "Sumatera Utara") {
+          var optionKota = [
+            "Medan|Medan",
+            "Gunungsitoli|Gunungsitoli",
+            "Padang Sidempuan|Padang Sidempuan",
+            "Sibolga|Sibolga",
+            "Tanjungbalai|Tanjungbalai",
+            "Tebing Tinggi|Tebing Tinggi",
+          ];
+        } else if (prov.value == "Sumatera Barat") {
+          var optionKota = [
+            "Padang|Padang",
+            "Bukit Tinggi|Bukit Tinggi",
+            "Pariaman|Pariaman",
+            "Payakumbuh|Payakumbuh",
+            "Sawahlunto|Sawahlunto",
+            "Solok|Solok",
+          ];
+        } else if (prov.value == "DKI Jakarta") {
+          var optionKota = [
+            "Jakarta Barat|Jakarta Barat",
+            "Jakarta Pusat|Jakarta Pusat",
+            "Jakarta Timur|Jakarta Timur",
+            "Jakarta Selatan|Jakarta Selatan",
+            "Jakarta Utara|Jakarta Utara",
+          ];
+        } else if (prov.value == "Jawa Barat") {
+          var optionKota = [
+            "Bandung|Bandung",
+            "Bekasi|Bekasi",
+            "Bogor|Bogor",
+            "Depok|Depok",
+            "Sukabumi|Sukabumi",
+            "Tasikmalaya|Tasikmalaya",
+            "Banjar|Banjar",
+          ];
+        } else if (prov.value == "Jawa Timur") {
+          var optionKota = [
+            "Blitar|Blitar",
+            "Kediri|Kediri",
+            "Madiun|Madiun",
+            "Malang|Malang",
+            "Mojokerto|Mojokerto",
+          ];
+        }
+
+        for (var option in optionKota) {
+          var pair = optionKota[option].split("|");
+          var createOption = document.createElement("option");
+
+          createOption.value = pair[0];
+          createOption.innerHTML = pair[1];
+          kota.options.add(createOption);
+        }
+      }
+
+      function outputText() {
+        var text = document.getElementById("headingText");
+        var prov = document.getElementById("prov");
+        var kota = document.getElementById("kota");
+
+        text.innerHTML =
+          "Pada provinsi " + prov.value + " ada kota " + kota.value;
+      }
+
+      function darkMode() {
+        const ubah = document.body;
+        ubah.classList.toggle("dark");
+      }
+    </script>
+  </body>
+</html>
